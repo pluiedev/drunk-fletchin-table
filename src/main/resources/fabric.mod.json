@@ -1,32 +1,35 @@
 {
   "schemaVersion": 1,
-  "id": "modid",
+  "id": "drunkfletchintable",
   "version": "${version}",
 
-  "name": "Example Mod",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "name": "Drunk Fletchin Table",
+  "description": "cursed fletching table tweaks to make them actually do something",
   "authors": [
-    "Me!"
+    "leocth"
   ],
   "contact": {
     "homepage": "https://fabricmc.net/",
     "sources": "https://github.com/FabricMC/fabric-example-mod"
   },
 
-  "license": "CC0-1.0",
-  "icon": "assets/modid/icon.png",
+  "license": "MIT",
+  "icon": "assets/drunkfletchintable/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.fabricmc.example.ExampleModKt::init"
+      "com.leocth.drunkfletchintable.DrunkFletchinTable::init"
+    ],
+    "client": [
+      "com.leocth.drunkfletchintable.DrunkFletchinTable::clientInit"
     ]
   },
   "mixins": [
-    "modid.mixins.json"
+    "drunkfletchintable.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=0.8.7",
+    "fabricloader": ">=0.9.0",
     "fabric": "*",
     "fabric-language-kotlin": "*",
     "minecraft": "1.16.x"

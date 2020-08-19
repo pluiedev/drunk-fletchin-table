@@ -1,0 +1,16 @@
+{
+    "type": "drunkfletchintable:fletching",
+    "group": "arrow",
+    "pattern": [
+        "Z|>"
+    ],
+    "key": {
+        ">": { "item": "minecraft:flint" },
+        "|": { "item": "minecraft:stick" },
+        "Z": { "item": "minecraft:feather" }
+    },
+    "result": {
+        "item": "minecraft:arrow",
+        "count": 4
+    }
+}
