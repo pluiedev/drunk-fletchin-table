@@ -33,6 +33,7 @@ class FletchinTableScreenHandler(
 {
     private val player: PlayerEntity = playerInventory.player
     private val craftingSlotIndex = playerInventory.size() - playerInventory.armor.size
+    private val tippingSlotIndex = craftingSlotIndex + 10
     private val fletchingInput = CraftingInventory(this, 3, 3)
     private val fletchingResult = CraftingResultInventory()
 
@@ -106,6 +107,7 @@ class FletchinTableScreenHandler(
         sendContentUpdates()
     }
 
+
     override fun sendContentUpdates() {
         super.sendContentUpdates()
         context.run { world, pos ->
@@ -127,6 +129,11 @@ class FletchinTableScreenHandler(
 
     @Environment(EnvType.CLIENT)
     fun getTippingProgress(): Float = delegate[1] / getPotionUsesUsing().toFloat()
+
+    fun drainPotion() {
+        delegate[3] = Registry.POTION.getRawId(Potions.EMPTY)
+        delegate[2] = 0
+    }
 
     override fun close(player: PlayerEntity?) {
         super.close(player)
@@ -175,26 +182,46 @@ class FletchinTableScreenHandler(
         if (slot != null && slot.hasStack()) {
             val oldStack = slot.stack
             newStack = oldStack.copy()
-            if (index == craftingSlotIndex) {
-                context.run { world, _ ->
-                    oldStack.item.onCraft(oldStack, world, player)
-                }
-                if (!insertItem(oldStack, 10, 46, true)) {
-                    return ItemStack.EMPTY
-                }
-                slot.onStackChanged(oldStack, newStack)
-            } else if (index in 0 until 37) {
-                if (!insertItem(oldStack, craftingSlotIndex+1, craftingSlotIndex+9, false)) {
-                    if (index in 0..26) {
-                        if (!insertItem(oldStack, 27, 36, false)) {
+            when (getDelegatedMode()) {
+                FletchinTableMode.CRAFTING -> {
+                    if (index == craftingSlotIndex) {
+                        context.run { world, _ ->
+                            oldStack.item.onCraft(oldStack, world, player)
+                        }
+                        if (!insertItem(oldStack, 0, 36, true)) {
                             return ItemStack.EMPTY
                         }
-                    } else if (!insertItem(oldStack, 0, 27, false)) {
+                        slot.onStackChanged(oldStack, newStack)
+                    } else if (index in 0 until 37) {
+                        if (!insertItem(oldStack, craftingSlotIndex+1, craftingSlotIndex+9, false)) {
+                            if (index in 0..26) {
+                                if (!insertItem(oldStack, 27, 36, false)) {
+                                    return ItemStack.EMPTY
+                                }
+                            } else if (!insertItem(oldStack, 0, 27, false)) {
+                                return ItemStack.EMPTY
+                            }
+                        }
+                    } else if (!insertItem(oldStack, 0, 36, false)) {
                         return ItemStack.EMPTY
                     }
                 }
-            } else if (!insertItem(oldStack, 0, 36, false)) {
-                return ItemStack.EMPTY
+                FletchinTableMode.TIPPING -> {
+                    if (index in 0 until 37) {
+                        if (!insertItem(oldStack, tippingSlotIndex, tippingSlotIndex+1, false)) {
+                            if (index in 0..26) {
+                                if (!insertItem(oldStack, 27, 36, false)) {
+                                    return ItemStack.EMPTY
+                                }
+                            } else if (!insertItem(oldStack, 0, 27, false)) {
+                                return ItemStack.EMPTY
+                            }
+                        }
+                    } else if (!insertItem(oldStack, 0, 36, false)) {
+                        return ItemStack.EMPTY
+                    }
+                }
+                else -> {}
             }
             if (oldStack.isEmpty) {
                 slot.stack = ItemStack.EMPTY
@@ -212,4 +239,6 @@ class FletchinTableScreenHandler(
 
         return newStack
     }
+
+
 }

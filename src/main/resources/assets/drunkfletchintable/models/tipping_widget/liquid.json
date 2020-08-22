@@ -1,0 +1,47 @@
+{
+	"textures": {
+		"0": "drunkfletchintable:tipping_widget",
+		"particle": "drunkfletchintable:tipping_widget"
+	},
+	"elements": [
+		{
+			"from": [6.4125, 1.8, 6.2125],
+			"to": [7.9125, 3.3, 7.7125],
+			"rotation": {"angle": 0, "axis": "y", "origin": [6.9125, 3.55, 6.9625]},
+			"faces": {
+				"north": {"uv": [0, 2.5, 0.5, 3], "texture": "#0", "tintindex": 0},
+				"east": {"uv": [0, 2.5, 0.5, 3], "texture": "#0", "tintindex": 0},
+				"south": {"uv": [0, 2.5, 0.5, 3], "texture": "#0", "tintindex": 0},
+				"west": {"uv": [0, 2.5, 0.5, 3], "texture": "#0", "tintindex": 0},
+				"up": {"uv": [0, 2.5, 0.5, 3], "texture": "#0", "tintindex": 0},
+				"down": {"uv": [0, 2.5, 0.5, 3], "texture": "#0", "tintindex": 0}
+			}
+		},
+		{
+			"from": [5.9375, 2, 6.4125],
+			"to": [7.6125, 3.1, 7.5125],
+			"rotation": {"angle": 0, "axis": "y", "origin": [6.9125, 3.55, 6.9625]},
+			"faces": {
+				"north": {"uv": [0, 2.5, 0.5, 3], "texture": "#0", "cullface": "north", "tintindex": 0},
+				"east": {"uv": [0, 2.5, 0.5, 3], "texture": "#0", "cullface": "east", "tintindex": 0},
+				"south": {"uv": [0, 2.5, 0.5, 3], "texture": "#0", "cullface": "south", "tintindex": 0},
+				"west": {"uv": [0, 2.5, 0.5, 3], "texture": "#0", "cullface": "west", "tintindex": 0},
+				"up": {"uv": [0, 2.5, 0.5, 3], "texture": "#0", "cullface": "up", "tintindex": 0},
+				"down": {"uv": [0, 2.5, 0.5, 3], "texture": "#0", "cullface": "down", "tintindex": 0}
+			}
+		},
+		{
+			"from": [5.0125, 2.3, 6.7125],
+			"to": [7.6375, 2.8, 7.2125],
+			"rotation": {"angle": 0, "axis": "y", "origin": [6.9125, 3.55, 6.9625]},
+			"faces": {
+				"north": {"uv": [0, 2.5, 0.5, 3], "texture": "#0", "tintindex": 0},
+				"east": {"uv": [0, 2.5, 0.5, 3], "texture": "#0", "tintindex": 0},
+				"south": {"uv": [0, 2.5, 0.5, 3], "texture": "#0", "tintindex": 0},
+				"west": {"uv": [0, 2.5, 0.5, 3], "texture": "#0", "tintindex": 0},
+				"up": {"uv": [0, 2.5, 0.5, 3], "texture": "#0", "tintindex": 0},
+				"down": {"uv": [0, 2.5, 0.5, 3], "texture": "#0", "tintindex": 0}
+			}
+		}
+	]
+}

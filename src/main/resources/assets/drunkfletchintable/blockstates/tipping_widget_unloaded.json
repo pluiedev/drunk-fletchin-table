@@ -1,0 +1,6 @@
+{
+    "_comment": "this blockstate file is NOT used on an actual block! beware!",
+    "variants": {
+        "": { "model": "drunkfletchintable:tipping_widget/unloaded" }
+    }
+}

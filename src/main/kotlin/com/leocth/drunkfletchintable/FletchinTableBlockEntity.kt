@@ -154,6 +154,8 @@ class FletchinTableBlockEntity:
     override fun toClientTag(tag: CompoundTag): CompoundTag {
         tag.putString("mode", mode.toString())
         Inventories.toTag(tag, inventory)
+        tag.putInt("tippingTicks", tippingTicks)
+        tag.putString("potion", Registry.POTION.getId(potion).toString())
         return tag
     }
 
@@ -165,5 +167,7 @@ class FletchinTableBlockEntity:
         }
         inventory.clear()
         Inventories.fromTag(tag, inventory)
+        tippingTicks = tag.getInt("tippingTicks")
+        potion = Registry.POTION.get(Identifier(tag.getString("potion")))
     }
 }

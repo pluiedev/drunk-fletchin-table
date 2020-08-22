@@ -7,16 +7,19 @@ import net.minecraft.client.gui.Drawable
 import net.minecraft.client.gui.DrawableHelper
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.util.Identifier
+import java.util.*
 
 class CraftingScreenWidget(
     private val client: MinecraftClient?,
     private val x: Int,
     private val y: Int
-): DrawableHelper(), Drawable {
+): FletchinScreenWidget() {
 
     companion object {
         val TEXTURE = Identifier(MODID, "textures/gui/fletchin_table/crafting.png")
     }
+
+    override fun onMouseClick(mouseX: Double, mouseY: Double, button: Int): Boolean? = null
 
     override fun render(matrices: MatrixStack, mouseX: Int, mouseY: Int, delta: Float) {
         RenderSystem.color4f(1.0f, 1.0f, 1.0f, 1.0f)

@@ -1,0 +1,21 @@
+{
+	"textures": {
+		"0": "drunkfletchintable:tipping_widget",
+		"particle": "drunkfletchintable:tipping_widget"
+	},
+	"elements": [
+		{
+			"from": [2.625, 0.1125, 6.7875],
+			"to": [2.975, 1.6875, 7.1375],
+			"rotation": {"angle": 0, "axis": "y", "origin": [7.0725, 3.8375, 6.9625]},
+			"faces": {
+				"north": {"uv": [0, 2.5, 0.5, 3], "texture": "#0", "tintindex": 0},
+				"east": {"uv": [0, 2.5, 0.5, 3], "texture": "#0", "tintindex": 0},
+				"south": {"uv": [0, 2.5, 0.5, 3], "texture": "#0", "tintindex": 0},
+				"west": {"uv": [0, 2.5, 0.5, 3], "texture": "#0", "tintindex": 0},
+				"up": {"uv": [0, 2.5, 0.5, 3], "texture": "#0", "tintindex": 0},
+				"down": {"uv": [0, 2.5, 0.5, 3], "texture": "#0", "tintindex": 0}
+			}
+		}
+	]
+}

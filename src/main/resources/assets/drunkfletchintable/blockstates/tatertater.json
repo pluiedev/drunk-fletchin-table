@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=north": { "model": "drunkfletchintable:block/iusedtobeataterlikeyou" },
+        "facing=east":  { "model": "drunkfletchintable:block/iusedtobeataterlikeyou", "y": 90 },
+        "facing=south": { "model": "drunkfletchintable:block/iusedtobeataterlikeyou", "y": 180 },
+        "facing=west":  { "model": "drunkfletchintable:block/iusedtobeataterlikeyou", "y": 270 }
+    }
+}
