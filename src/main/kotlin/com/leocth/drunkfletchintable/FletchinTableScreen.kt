@@ -11,8 +11,6 @@ import net.minecraft.client.gui.widget.TexturedButtonWidget
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.network.PacketByteBuf
-import net.minecraft.screen.slot.Slot
-import net.minecraft.screen.slot.SlotActionType
 import net.minecraft.text.Text
 import net.minecraft.util.Identifier
 

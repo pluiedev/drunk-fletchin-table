@@ -1,18 +1,18 @@
 package com.leocth.drunkfletchintable
 
-import com.leocth.drunkfletchintable.mixin.FletchingTableMixin
 import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
-import net.minecraft.block.*
+import net.minecraft.block.Block
+import net.minecraft.block.BlockState
+import net.minecraft.block.Material
+import net.minecraft.block.ShapeContext
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemPlacementContext
-import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.sound.BlockSoundGroup
 import net.minecraft.state.StateManager
 import net.minecraft.state.property.Properties
 import net.minecraft.text.ClickEvent
 import net.minecraft.text.HoverEvent
 import net.minecraft.text.LiteralText
-import net.minecraft.text.Style
 import net.minecraft.util.ActionResult
 import net.minecraft.util.Hand
 import net.minecraft.util.hit.BlockHitResult

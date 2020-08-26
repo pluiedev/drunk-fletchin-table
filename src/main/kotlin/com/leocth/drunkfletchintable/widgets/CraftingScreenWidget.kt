@@ -3,11 +3,8 @@ package com.leocth.drunkfletchintable.widgets
 import com.leocth.drunkfletchintable.MODID
 import com.mojang.blaze3d.systems.RenderSystem
 import net.minecraft.client.MinecraftClient
-import net.minecraft.client.gui.Drawable
-import net.minecraft.client.gui.DrawableHelper
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.util.Identifier
-import java.util.*
 
 class CraftingScreenWidget(
     private val client: MinecraftClient?,

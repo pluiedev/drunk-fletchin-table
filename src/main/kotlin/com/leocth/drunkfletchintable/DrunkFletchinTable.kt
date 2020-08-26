@@ -1,19 +1,14 @@
 @file:JvmName("DrunkFletchinTable")
 package com.leocth.drunkfletchintable
 
-import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap
 import net.fabricmc.fabric.api.client.model.ModelLoadingRegistry
-import net.fabricmc.fabric.api.client.model.ModelProviderContext
-import net.fabricmc.fabric.api.client.model.ModelResourceProvider
 import net.fabricmc.fabric.api.client.rendereregistry.v1.BlockEntityRendererRegistry
 import net.fabricmc.fabric.api.client.screenhandler.v1.ScreenRegistry
 import net.fabricmc.fabric.api.screenhandler.v1.ScreenHandlerRegistry
-import net.minecraft.block.Block
 import net.minecraft.block.Blocks
 import net.minecraft.block.entity.BlockEntityType
 import net.minecraft.client.render.RenderLayer
-import net.minecraft.client.render.model.UnbakedModel
 import net.minecraft.client.util.ModelIdentifier
 import net.minecraft.item.BlockItem
 import net.minecraft.item.Item

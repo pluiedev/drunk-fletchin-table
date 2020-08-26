@@ -15,9 +15,11 @@ import net.minecraft.item.Items
 import net.minecraft.item.PotionItem
 import net.minecraft.network.packet.s2c.play.ScreenHandlerSlotUpdateS2CPacket
 import net.minecraft.potion.Potion
-import net.minecraft.potion.PotionUtil
 import net.minecraft.potion.Potions
-import net.minecraft.screen.*
+import net.minecraft.screen.ArrayPropertyDelegate
+import net.minecraft.screen.PropertyDelegate
+import net.minecraft.screen.ScreenHandler
+import net.minecraft.screen.ScreenHandlerContext
 import net.minecraft.screen.slot.Slot
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.util.registry.Registry

@@ -1,16 +1,12 @@
 package com.leocth.drunkfletchintable
 
-import io.netty.buffer.Unpooled
 import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable
-import net.fabricmc.fabric.api.network.ServerSidePacketRegistry
-import net.fabricmc.fabric.api.server.PlayerStream
 import net.minecraft.block.BlockState
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.inventory.Inventories
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
 import net.minecraft.nbt.CompoundTag
-import net.minecraft.network.PacketByteBuf
 import net.minecraft.potion.Potion
 import net.minecraft.potion.PotionUtil
 import net.minecraft.potion.Potions
