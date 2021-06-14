@@ -1,10 +1,10 @@
-package com.leocth.drunkfletchintable.widgets
+package com.leocth.drunkfletchintable.old.widgets
 
 import com.leocth.drunkfletchintable.FletchinTableBlockEntity.Companion.TIPPING_MAX_USES
 import com.leocth.drunkfletchintable.FletchinTableScreenHandler
-import com.leocth.drunkfletchintable.MODID
-import com.leocth.drunkfletchintable.PACKET_C2S_FT_DRAIN
-import com.leocth.drunkfletchintable.isShiftPressed
+import com.leocth.drunkfletchintable.old.MODID
+import com.leocth.drunkfletchintable.old.PACKET_C2S_FT_DRAIN
+import com.leocth.drunkfletchintable.old.isShiftPressed
 import com.mojang.blaze3d.systems.RenderSystem
 import io.netty.buffer.Unpooled
 import net.fabricmc.fabric.api.network.ClientSidePacketRegistry

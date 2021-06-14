@@ -1,4 +1,4 @@
-package com.leocth.drunkfletchintable
+package com.leocth.drunkfletchintable.old
 
 import net.minecraft.text.Text
 import net.minecraft.text.TranslatableText

@@ -1,4 +1,4 @@
-package com.leocth.drunkfletchintable
+package com.leocth.drunkfletchintable.old
 
 import com.mojang.datafixers.util.Pair
 import net.fabricmc.fabric.api.renderer.v1.RendererAccess

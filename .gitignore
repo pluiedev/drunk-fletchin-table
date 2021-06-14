@@ -16,3 +16,4 @@ out/
 run/
 minecraft/
 !src/main/resources/assets/minecraft/*
+/src/main/old/

@@ -1,7 +1,7 @@
-package com.leocth.drunkfletchintable
+package com.leocth.drunkfletchintable.old
 
-import com.leocth.drunkfletchintable.widgets.CraftingScreenWidget
-import com.leocth.drunkfletchintable.widgets.FletchinScreenWidget
+import com.leocth.drunkfletchintable.old.widgets.CraftingScreenWidget
+import com.leocth.drunkfletchintable.old.widgets.FletchinScreenWidget
 import com.leocth.drunkfletchintable.widgets.TippingScreenWidget
 import com.mojang.blaze3d.systems.RenderSystem
 import io.netty.buffer.Unpooled

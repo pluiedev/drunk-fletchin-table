@@ -1,7 +1,7 @@
 {
 	"textures": {
 		"0": "drunkfletchintable:block/tatertater",
-		"1": "minecraft:entity/arrow",
+		"1": "minecraft:entity/projectiles/arrow",
 		"particle": "drunkfletchintable:block/tatertater"
 	},
 	"display": {

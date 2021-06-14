@@ -1,4 +1,4 @@
-package com.leocth.drunkfletchintable.widgets
+package com.leocth.drunkfletchintable.old.widgets
 
 import net.minecraft.client.gui.Drawable
 import net.minecraft.client.gui.DrawableHelper

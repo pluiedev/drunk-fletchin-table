@@ -1,6 +1,6 @@
-package com.leocth.drunkfletchintable
+package com.leocth.drunkfletchintable.old
 
-import com.leocth.drunkfletchintable.tweaks.ImprovedArrowEntityRenderer
+import com.leocth.drunkfletchintable.old.tweaks.ImprovedArrowEntityRenderer
 import net.minecraft.block.FletchingTableBlock
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.render.RenderLayer

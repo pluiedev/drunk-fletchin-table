@@ -3,8 +3,8 @@
   "id": "drunkfletchintable",
   "version": "${version}",
 
-  "name": "Drunk Fletchin Table",
-  "description": "cursed fletching table tweaks to make them actually do something",
+  "name": "Drunk Fletchin' Table",
+  "description": "Breathes new life into the forgotten fletching table",
   "authors": [
     "leocth"
   ],
@@ -18,10 +18,16 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "com.leocth.drunkfletchintable.DrunkFletchinTable::init"
+      {
+        "adapter": "kotlin",
+        "value": "com.leocth.drunkfletchintable.DrunkFletchinTable"
+      }
     ],
     "client": [
-      "com.leocth.drunkfletchintable.DrunkFletchinTable::clientInit"
+      {
+        "adapter": "kotlin",
+        "value": "com.leocth.drunkfletchintable.client.DrunkFletchinTableClient"
+      }
     ]
   },
   "mixins": [
@@ -31,7 +37,7 @@
     "fabricloader": ">=0.9.0",
     "fabric": "*",
     "fabric-language-kotlin": "*",
-    "minecraft": "1.16.x"
+    "minecraft": ">=1.17"
   },
   "suggests": {
     "flamingo": "*"

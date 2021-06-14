@@ -1,6 +1,6 @@
-package com.leocth.drunkfletchintable
+package com.leocth.drunkfletchintable.old
 
-import com.leocth.drunkfletchintable.FletchinTableBlockEntity.Companion.TIPPING_TIME_PER_ITEM
+import com.leocth.drunkfletchintable.old.FletchinTableBlockEntity.Companion.TIPPING_TIME_PER_ITEM
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.minecraft.block.Blocks
@@ -62,26 +62,32 @@ class FletchinTableScreenHandler(
         addSlot(Slot(playerInventory, 40, 10, 151))
 
         // crafting
-        addSlot(FletchinResultSlot(
+        addSlot(
+            FletchinResultSlot(
             this, FletchinTableMode.CRAFTING, playerInventory.player,
             fletchingInput, fletchingResult, 0, 169, 40
-        ))
+        )
+        )
         for (i in 0 until 3) {
             for (j in 0 until 3) {
-                addSlot(FletchinSlot(this, FletchinTableMode.CRAFTING,
+                addSlot(
+                    FletchinSlot(this, FletchinTableMode.CRAFTING,
                     fletchingInput, i * 3 + j, 82 + j * 18, 22 + i * 18
-                ))
+                )
+                )
             }
         }
 
         // tipping
-        addSlot(FletchinSlotFiltered(
+        addSlot(
+            FletchinSlotFiltered(
             this, FletchinTableMode.TIPPING, inventory, 0, 70, 25)
             {
                 it.item is PotionItem
             }
         )
-        addSlot(FletchinSlotFiltered(
+        addSlot(
+            FletchinSlotFiltered(
             this, FletchinTableMode.TIPPING, inventory, 1, 138, 61)
             {
                 //TODO

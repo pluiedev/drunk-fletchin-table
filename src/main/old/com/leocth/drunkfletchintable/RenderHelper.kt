@@ -1,4 +1,4 @@
-package com.leocth.drunkfletchintable
+package com.leocth.drunkfletchintable.old
 
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.client.util.math.Vector3f

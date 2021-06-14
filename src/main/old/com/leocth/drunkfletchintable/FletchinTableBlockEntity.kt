@@ -1,5 +1,6 @@
-package com.leocth.drunkfletchintable
+package com.leocth.drunkfletchintable.old
 
+import com.leocth.drunkfletchintable.block.entity.LootlessContainerBlockEntity
 import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable
 import net.minecraft.block.BlockState
 import net.minecraft.entity.player.PlayerInventory
@@ -84,11 +85,11 @@ class FletchinTableBlockEntity:
 
     override fun toTag(tag: CompoundTag): CompoundTag {
         super.toTag(tag)
-        tag.putString("mode", mode.toString())
+        //tag.putString("mode", mode.toString())
         tag.putInt("tippingTicks", tippingTicks)
         tag.putInt("tippingMaxTicks", tippingMaxTicks)
         tag.putInt("tippingUsesLeft", tippingUsesLeft)
-        Inventories.toTag(tag, inventory)
+        //Inventories.toTag(tag, inventory)
         tag.putString("potion", Registry.POTION.getId(potion).toString())
         return tag
     }

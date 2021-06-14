@@ -1,4 +1,4 @@
-package com.leocth.drunkfletchintable
+package com.leocth.drunkfletchintable.old
 
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment

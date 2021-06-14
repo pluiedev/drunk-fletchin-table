@@ -1,4 +1,4 @@
-package com.leocth.drunkfletchintable.tweaks
+package com.leocth.drunkfletchintable.old.tweaks
 
 import net.minecraft.client.render.OverlayTexture
 import net.minecraft.client.render.RenderLayer

@@ -1,4 +1,4 @@
-package com.leocth.drunkfletchintable
+package com.leocth.drunkfletchintable.block
 
 import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
 import net.minecraft.block.Block
@@ -9,6 +9,7 @@ import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.sound.BlockSoundGroup
 import net.minecraft.state.StateManager
+import net.minecraft.state.property.DirectionProperty
 import net.minecraft.state.property.Properties
 import net.minecraft.text.ClickEvent
 import net.minecraft.text.HoverEvent
@@ -17,6 +18,7 @@ import net.minecraft.util.ActionResult
 import net.minecraft.util.Hand
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
+import net.minecraft.util.math.Direction
 import net.minecraft.util.shape.VoxelShape
 import net.minecraft.world.BlockView
 import net.minecraft.world.World
@@ -28,8 +30,8 @@ class TinyTaterrBlokk : Block(
         .sounds(BlockSoundGroup.WOOD)
 ) {
     companion object {
-        val FACING = Properties.HORIZONTAL_FACING
-        val SHAPE: VoxelShape = createCuboidShape(6.0, 0.0, 6.0, 10.0, 5.75, 10.0)
+        private val FACING: DirectionProperty = Properties.HORIZONTAL_FACING
+        private val SHAPE: VoxelShape = createCuboidShape(6.0, 0.0, 6.0, 10.0, 5.75, 10.0)
     }
 
     override fun getOutlineShape(

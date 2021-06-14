@@ -1,4 +1,4 @@
-package com.leocth.drunkfletchintable
+package com.leocth.drunkfletchintable.old
 
 import net.fabricmc.fabric.api.network.ServerSidePacketRegistry
 import net.minecraft.util.Identifier

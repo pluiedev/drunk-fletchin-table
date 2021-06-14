@@ -1,4 +1,4 @@
-package com.leocth.drunkfletchintable
+package com.leocth.drunkfletchintable.old
 
 import com.google.gson.JsonObject
 import com.leocth.drunkfletchintable.mixin.ShapedRecipeHacks

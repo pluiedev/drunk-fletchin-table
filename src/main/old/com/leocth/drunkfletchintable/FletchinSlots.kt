@@ -1,4 +1,4 @@
-package com.leocth.drunkfletchintable
+package com.leocth.drunkfletchintable.old
 
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.inventory.CraftingInventory

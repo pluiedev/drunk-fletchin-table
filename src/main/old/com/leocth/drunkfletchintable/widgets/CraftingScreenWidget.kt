@@ -1,6 +1,6 @@
-package com.leocth.drunkfletchintable.widgets
+package com.leocth.drunkfletchintable.old.widgets
 
-import com.leocth.drunkfletchintable.MODID
+import com.leocth.drunkfletchintable.old.MODID
 import com.mojang.blaze3d.systems.RenderSystem
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.util.math.MatrixStack

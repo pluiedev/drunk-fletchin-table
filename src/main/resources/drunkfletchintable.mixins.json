@@ -3,12 +3,7 @@
     "package": "com.leocth.drunkfletchintable.mixin",
     "compatibilityLevel": "JAVA_8",
     "mixins": [
-        "FletchingTableMixin",
-        "ShapedRecipeHacks"
-    ],
-    "client": [
-        "ClientRecipeBookMixin",
-        "EntityRenderDispatcherMixin"
+        "FletchingTableMixin"
     ],
     "injectors": {
         "defaultRequire": 1
