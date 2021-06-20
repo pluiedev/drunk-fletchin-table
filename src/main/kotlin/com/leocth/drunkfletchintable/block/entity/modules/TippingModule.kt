@@ -2,11 +2,16 @@ package com.leocth.drunkfletchintable.block.entity.modules
 
 import com.leocth.drunkfletchintable.block.entity.FletchinTableBlockEntity
 import com.leocth.drunkfletchintable.util.*
+import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.potion.PotionUtil
 import net.minecraft.potion.Potions
+import net.minecraft.screen.ScreenHandler
+import net.minecraft.text.Text
+import net.minecraft.text.TranslatableText
 import kotlin.reflect.KProperty
 
 class TippingModule(blockEntity: FletchinTableBlockEntity) : FletchinModule(blockEntity) {
@@ -50,6 +55,12 @@ class TippingModule(blockEntity: FletchinTableBlockEntity) : FletchinModule(bloc
     override fun writeClientNbt(nbt: NbtCompound) {
         writeNbt(nbt)
     }
+
+    override fun createMenu(syncId: Int, inv: PlayerInventory, player: PlayerEntity): ScreenHandler? {
+        TODO("Not yet implemented")
+    }
+
+    override fun getDisplayName(): Text = TranslatableText("screen.drunkfletchintable.tipping")
 
     // TODO: calculating this every tick is a bit wasteful
     private val canWork

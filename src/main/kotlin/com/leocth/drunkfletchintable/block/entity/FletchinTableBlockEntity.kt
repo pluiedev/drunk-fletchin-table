@@ -22,16 +22,9 @@ import net.minecraft.util.math.Direction
 import net.minecraft.world.World
 
 class FletchinTableBlockEntity(blockPos: BlockPos, blockState: BlockState):
-    BlockEntity(TYPE, blockPos, blockState),
-    BlockEntityClientSerializable, NamedScreenHandlerFactory
+    BlockEntity(TYPE, blockPos, blockState), BlockEntityClientSerializable
 {
     val modules: MutableMap<Direction, FletchinModule> = mutableMapOf()
-
-    override fun getDisplayName() = TranslatableText("container.drunkfletchintable.fletchin_table")
-
-    override fun createMenu(syncId: Int, inv: PlayerInventory, player: PlayerEntity): ScreenHandler {
-        TODO("Not yet implemented")
-    }
 
     companion object {
         @JvmField
@@ -69,7 +62,6 @@ class FletchinTableBlockEntity(blockPos: BlockPos, blockState: BlockState):
                 }
             }
         }
-
     }
 
     override fun writeNbt(nbt: NbtCompound): NbtCompound {

@@ -40,16 +40,22 @@ object FletchingTableDelegate {
         if (!world.isClient) {
             val stack = player.getStackInHand(hand)
             val item = stack.item
-            if (item is ModuleProvider<*>) {
-                val blockEntity = world.getBlockEntity(pos)
-                if (blockEntity is FletchinTableBlockEntity) {
-                    val modules = blockEntity.modules
-                    val side = hit.side
 
-                    if (!modules.contains(side)) {
-                        modules[side] = item.getModule(blockEntity)
-                        blockEntity.sync()
-                        return ActionResult.SUCCESS
+            val blockEntity = world.getBlockEntity(pos)
+            if (blockEntity is FletchinTableBlockEntity) {
+                val modules = blockEntity.modules
+                val side = hit.side
+
+                if (item is ModuleProvider<*> && side !in modules) {
+                    // add new module
+                    modules[side] = item.getModule(blockEntity)
+                    blockEntity.sync()
+                    return ActionResult.SUCCESS
+                } else {
+
+                    val module = modules[side]
+                    module?.let {
+                        player.openHandledScreen(it)
                     }
                 }
             }
