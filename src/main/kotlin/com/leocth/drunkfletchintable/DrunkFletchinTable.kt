@@ -1,11 +1,8 @@
 package com.leocth.drunkfletchintable
 
-import com.leocth.drunkfletchintable.block.TinyTaterrBlokk
 import com.leocth.drunkfletchintable.block.entity.FletchinTableBlockEntity
 import com.leocth.drunkfletchintable.block.entity.modules.ModuleRegistry
 import net.fabricmc.api.ModInitializer
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings
-import net.minecraft.item.BlockItem
 import net.minecraft.util.Identifier
 import net.minecraft.util.registry.Registry
 import org.apache.logging.log4j.LogManager

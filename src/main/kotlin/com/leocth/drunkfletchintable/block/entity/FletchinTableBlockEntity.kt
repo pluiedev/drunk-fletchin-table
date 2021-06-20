@@ -76,11 +76,11 @@ class FletchinTableBlockEntity(blockPos: BlockPos, blockState: BlockState):
         super.writeNbt(nbt)
         nbt.putCompound("modules") { modulesNbt ->
             for ((dir, module) in modules) {
-                modulesNbt.putCompound(dir.getName()) {
+                modulesNbt.putCompound(dir.getName()) next@{
                     val id = ModuleRegistry.findKey(module.type)
                     if (id == null) {
                         DrunkFletchinTable.LOGGER.error("Module type $module is not registered! What the heck?")
-                        return@putCompound
+                        return@next
                     }
                     it.putIdentifier("id", id)
                     module.writeNbt(it)
@@ -113,11 +113,11 @@ class FletchinTableBlockEntity(blockPos: BlockPos, blockState: BlockState):
     override fun toClientTag(nbt: NbtCompound): NbtCompound {
         nbt.putCompound("modules") { modulesNbt ->
             for ((dir, module) in modules) {
-                modulesNbt.putCompound(dir.getName()) {
+                modulesNbt.putCompound(dir.getName()) next@{
                     val id = ModuleRegistry.findKey(module.type)
                     if (id == null) {
                         DrunkFletchinTable.LOGGER.error("Module type $module is not registered! What the heck?")
-                        return@putCompound
+                        return@next
                     }
                     it.putIdentifier("id", id)
                     module.writeClientNbt(it)
