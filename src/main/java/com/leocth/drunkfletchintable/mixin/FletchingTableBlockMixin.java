@@ -1,5 +1,6 @@
 package com.leocth.drunkfletchintable.mixin;
 
+import com.leocth.drunkfletchintable.block.FletchingTableDelegate;
 import com.leocth.drunkfletchintable.block.entity.FletchinTableBlockEntity;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
@@ -20,37 +21,28 @@ import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 
 @Mixin(FletchingTableBlock.class)
-public abstract class FletchingTableMixin
+public abstract class FletchingTableBlockMixin
         extends CraftingTableBlock
         implements BlockEntityProvider {
 
     private static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
 
-    protected FletchingTableMixin(Settings settings) {
-        super(settings);
-        this.setDefaultState(this.getStateManager().getDefaultState().with(FACING, Direction.NORTH));
-    }
+    protected FletchingTableBlockMixin(Settings settings) { super(settings); }
 
     @Override
     public BlockState getPlacementState(ItemPlacementContext ctx) {
-        return this.getDefaultState().with(FACING, ctx.getPlayerFacing().getOpposite());
+        return FletchingTableDelegate.getPlacementState(getDefaultState(), ctx);
     }
 
     @Nullable
     @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        return new FletchinTableBlockEntity(pos, state);
+        return FletchingTableDelegate.createBlockEntity(pos, state);
     }
 
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        if (!world.isClient) {
-            BlockEntity blockEntity = world.getBlockEntity(pos);
-            if (blockEntity instanceof FletchinTableBlockEntity ftbe) {
-                player.openHandledScreen(ftbe);
-            }
-        }
-        return ActionResult.SUCCESS;
+        return FletchingTableDelegate.onUse(state, world, pos, player, hand, hit);
     }
 
     @Nullable
@@ -65,7 +57,7 @@ public abstract class FletchingTableMixin
 
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(FACING);
+        FletchingTableDelegate.appendProperties(builder);
     }
 
     @Nullable

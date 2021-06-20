@@ -1,5 +1,6 @@
 package com.leocth.drunkfletchintable.client
 
+import com.leocth.drunkfletchintable.DftBlocks
 import com.leocth.drunkfletchintable.DrunkFletchinTable
 import com.leocth.drunkfletchintable.block.TinyTaterrBlokk
 import com.leocth.drunkfletchintable.block.entity.FletchinTableBlockEntity
@@ -13,6 +14,6 @@ import net.minecraft.util.registry.Registry
 
 object DrunkFletchinTableClient: ClientModInitializer {
     override fun onInitializeClient() {
-        BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), DrunkFletchinTable.TINY_TATER)
+        BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), DftBlocks.TINY_TATER)
     }
 }

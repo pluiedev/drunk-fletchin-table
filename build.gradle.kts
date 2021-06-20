@@ -4,6 +4,12 @@ plugins {
     `maven-publish`
 }
 
+repositories {
+    maven("https://ladysnake.jfrog.io/artifactory/mods") {
+        name = "Ladysnake Mods"
+    }
+}
+
 dependencies {
     val minecraftVersion: String by project
     val yarnVersion: String by project
@@ -18,6 +24,10 @@ dependencies {
 
     modImplementation("net.fabricmc.fabric-api:fabric-api:$fapiVersion")
     modImplementation("net.fabricmc:fabric-language-kotlin:$flkVersion")
+
+    arrayOf("base", "block").forEach {
+        modImplementation("io.github.onyxstudios.Cardinal-Components-API:cardinal-components-$it:$ccaVersion")
+    }
 }
 
 java {

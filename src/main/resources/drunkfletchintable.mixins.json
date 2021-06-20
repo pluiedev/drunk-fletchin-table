@@ -3,7 +3,7 @@
     "package": "com.leocth.drunkfletchintable.mixin",
     "compatibilityLevel": "JAVA_8",
     "mixins": [
-        "FletchingTableMixin"
+        "FletchingTableBlockMixin"
     ],
     "injectors": {
         "defaultRequire": 1

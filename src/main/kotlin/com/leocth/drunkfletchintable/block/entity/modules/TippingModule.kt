@@ -9,7 +9,7 @@ import net.minecraft.potion.PotionUtil
 import net.minecraft.potion.Potions
 import kotlin.reflect.KProperty
 
-class TippingModule(blockEntity: FletchinTableBlockEntity) : Module(blockEntity) {
+class TippingModule(blockEntity: FletchinTableBlockEntity) : FletchinModule(blockEntity) {
     private val ticker = Ticker(2, this::finishedTipping)
 
     private var potionStack by overwritable(ItemStack.EMPTY, this::onPotionStackUpdate)
@@ -91,6 +91,12 @@ class TippingModule(blockEntity: FletchinTableBlockEntity) : Module(blockEntity)
 
         }
         return newValue
+    }
+
+    override val type: ModuleType<*> = TYPE
+
+    companion object {
+        val TYPE = ModuleType(::TippingModule)
     }
 }
 
