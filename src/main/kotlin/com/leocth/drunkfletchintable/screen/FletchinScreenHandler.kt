@@ -16,29 +16,30 @@ abstract class FletchinScreenHandler(
     private val context: ScreenHandlerContext = ScreenHandlerContext.EMPTY,
 ): ScreenHandler(type, syncId) {
 
-    fun addPlayerInventorySlots(x: Int, y: Int) {
-        addSlotGrid(playerInventory, 1, 9, x, y)
-        addSlotGrid(playerInventory, 3, 9, x, y, startIndex = 9)
-
-        for (i in 0 until 3) {
-            for (j in 0 until 9) {
-                addSlot(Slot(playerInventory, i * 9 + j + 9, 45 + j * 18, 93 + i * 18))
-            }
-        }
-
+    protected fun addPlayerInventorySlots(
+        x: Int = 45,
+        y: Int = 93,
+        hotbarY: Int = 151,
+        offHandX: Int = 10,
+    ) {
         // hotbar
-        for (j in 0 until 9) {
-            addSlot(Slot(playerInventory, j, 45 + j * 18, 151))
-        }
+        addSlotGrid(playerInventory, 1, 9, x, y)
+
+        // main
+        addSlotGrid(playerInventory, 3, 9, x, hotbarY, startIndex = 9)
+
+        // offhand
+        addSlot(Slot(playerInventory, 40, offHandX, hotbarY))
     }
 
-    fun addSlotGrid(
+    protected fun addSlotGrid(
         inventory: Inventory,
         row: Int, column: Int,
         x: Int, y: Int,
         startIndex: Int = 0,
         slotOffsetX: Int = 18,
-        slotOffsetY: Int = slotOffsetX
+        slotOffsetY: Int = slotOffsetX,
+        addSlot: (Inventory, Int, Int, Int) -> Unit = this::addSlot
     ) {
         var curX = x
         var curY = y
@@ -46,13 +47,18 @@ abstract class FletchinScreenHandler(
 
         for (r in 0 until row) {
             for (c in 0 until column) {
-                addSlot(Slot(playerInventory, index, curX, curY))
+                addSlot(inventory, index, curX, curY)
                 index++
                 curX += slotOffsetX
             }
             curX = 0
             curY += slotOffsetY
         }
+    }
+
+    @Suppress("NOTHING_TO_INLINE")
+    protected inline fun addSlot(inventory: Inventory, index: Int, x: Int, y: Int) {
+        addSlot(Slot(inventory, index, x, y))
     }
 
     override fun canUse(player: PlayerEntity) = canUse(context, player, Blocks.FLETCHING_TABLE)
