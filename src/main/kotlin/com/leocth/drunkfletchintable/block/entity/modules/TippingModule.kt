@@ -3,6 +3,8 @@ package com.leocth.drunkfletchintable.block.entity.modules
 import com.leocth.drunkfletchintable.block.entity.FletchinTableBlockEntity
 import com.leocth.drunkfletchintable.screen.TippingScreenHandler
 import com.leocth.drunkfletchintable.util.*
+import net.fabricmc.api.EnvType
+import net.fabricmc.api.Environment
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.inventory.Inventory
@@ -62,6 +64,12 @@ class TippingModule(blockEntity: FletchinTableBlockEntity) : FletchinModule(bloc
             = TippingScreenHandler(syncId, playerInv, inv, screenHandlerContext)
 
     override fun getDisplayName(): Text = TranslatableText("screen.drunkfletchintable.tipping")
+
+
+
+    @Environment(EnvType.CLIENT)
+    override fun createButton(x: Int, y: Int): Button
+            = Button(x, y, 28, 182)
 
 
 

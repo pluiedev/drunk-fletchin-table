@@ -12,9 +12,10 @@ import net.minecraft.screen.slot.Slot
 abstract class FletchinScreenHandler(
     type: ScreenHandlerType<*>,
     syncId: Int,
-    private val playerInventory: PlayerInventory,
-    private val context: ScreenHandlerContext = ScreenHandlerContext.EMPTY,
+    val playerInventory: PlayerInventory,
+    val context: ScreenHandlerContext = ScreenHandlerContext.EMPTY,
 ): ScreenHandler(type, syncId) {
+    val player: PlayerEntity = playerInventory.player
 
     protected fun addPlayerInventorySlots(
         x: Int = 45,
