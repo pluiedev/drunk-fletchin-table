@@ -112,10 +112,6 @@ class TippingModule(blockEntity: FletchinTableBlockEntity) : FletchinModule(bloc
     companion object {
         val TYPE = ModuleType(::TippingModule)
     }
-
-    class Inv: Inventory {
-
-    }
 }
 
 // TODO create a config for this
