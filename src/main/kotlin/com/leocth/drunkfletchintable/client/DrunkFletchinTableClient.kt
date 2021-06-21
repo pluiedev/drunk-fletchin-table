@@ -1,19 +1,17 @@
 package com.leocth.drunkfletchintable.client
 
-import com.leocth.drunkfletchintable.DftBlocks
-import com.leocth.drunkfletchintable.DrunkFletchinTable
-import com.leocth.drunkfletchintable.block.TinyTaterrBlokk
-import com.leocth.drunkfletchintable.block.entity.FletchinTableBlockEntity
+import com.leocth.drunkfletchintable.block.DftBlocks
+import com.leocth.drunkfletchintable.client.screen.CraftingScreen
+import com.leocth.drunkfletchintable.screen.CraftingScreenHandler
 import net.fabricmc.api.ClientModInitializer
-import net.fabricmc.api.ModInitializer
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap
-import net.minecraft.block.Blocks
+import net.fabricmc.fabric.api.client.screenhandler.v1.ScreenRegistry
 import net.minecraft.client.render.RenderLayer
-import net.minecraft.util.Identifier
-import net.minecraft.util.registry.Registry
 
 object DrunkFletchinTableClient: ClientModInitializer {
     override fun onInitializeClient() {
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), DftBlocks.TINY_TATER)
+
+        ScreenRegistry.register(CraftingScreenHandler.TYPE, ::CraftingScreen)
     }
 }

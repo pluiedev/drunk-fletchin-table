@@ -1,7 +1,9 @@
 package com.leocth.drunkfletchintable
 
+import com.leocth.drunkfletchintable.block.DftBlocks
 import com.leocth.drunkfletchintable.block.entity.FletchinTableBlockEntity
 import com.leocth.drunkfletchintable.block.entity.modules.ModuleRegistry
+import com.leocth.drunkfletchintable.item.DftItems
 import net.fabricmc.api.ModInitializer
 import net.minecraft.util.Identifier
 import net.minecraft.util.registry.Registry

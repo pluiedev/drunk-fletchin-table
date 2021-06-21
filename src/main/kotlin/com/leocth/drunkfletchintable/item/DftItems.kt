@@ -1,8 +1,9 @@
-package com.leocth.drunkfletchintable
+package com.leocth.drunkfletchintable.item
 
+import com.leocth.drunkfletchintable.DrunkFletchinTable
+import com.leocth.drunkfletchintable.block.DftBlocks
 import com.leocth.drunkfletchintable.block.entity.modules.CraftingModule
 import com.leocth.drunkfletchintable.block.entity.modules.TippingModule
-import com.leocth.drunkfletchintable.item.AttachmentItem
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.minecraft.item.BlockItem
 import net.minecraft.item.Item

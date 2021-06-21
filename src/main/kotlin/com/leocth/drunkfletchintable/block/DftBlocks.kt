@@ -1,8 +1,7 @@
-package com.leocth.drunkfletchintable
+package com.leocth.drunkfletchintable.block
 
-import com.leocth.drunkfletchintable.block.TinyTaterrBlokk
+import com.leocth.drunkfletchintable.DrunkFletchinTable
 import net.minecraft.block.Block
-import net.minecraft.item.Item
 import net.minecraft.util.registry.Registry
 
 object DftBlocks {
