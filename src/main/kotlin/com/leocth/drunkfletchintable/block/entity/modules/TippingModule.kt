@@ -18,10 +18,12 @@ import net.minecraft.text.Text
 import net.minecraft.text.TranslatableText
 import kotlin.reflect.KProperty
 
-class TippingModule(blockEntity: FletchinTableBlockEntity) : FletchinModule(blockEntity) {
+class TippingModule(blockEntity: FletchinTableBlockEntity): FletchinModule(blockEntity) {
     private val ticker = Ticker(2, this::finishedTipping)
 
-    private var potionStack by overwritable(ItemStack.EMPTY, this::onPotionStackUpdate)
+    private var potionStack = ItemStack.EMPTY
+        set(value) { field = whenPotionStackIsSet(value) }
+
     private var arrowStack = ItemStack.EMPTY
     private var productStack = ItemStack.EMPTY
     private val potion = PotionWithAmount(Potions.EMPTY, 0)
@@ -56,8 +58,7 @@ class TippingModule(blockEntity: FletchinTableBlockEntity) : FletchinModule(bloc
 
     override fun writeClientNbt(nbt: NbtCompound) { writeNbt(nbt) }
 
-
-
+    // TODO: this doesn't work since potionStack is a property
     private val inv = ListBasedInventory(potionStack, arrowStack, productStack)
 
     override fun createMenu(syncId: Int, playerInv: PlayerInventory, player: PlayerEntity): ScreenHandler
@@ -93,26 +94,27 @@ class TippingModule(blockEntity: FletchinTableBlockEntity) : FletchinModule(bloc
         productStack.increment(1)
     }
 
-    private fun onPotionStackUpdate(property: KProperty<*>, oldValue: ItemStack, newValue: ItemStack): ItemStack {
-        if (newValue.isEmpty) return newValue
+    private fun whenPotionStackIsSet(value: ItemStack): ItemStack {
+        if (value.isEmpty) return value
 
         if (potion.isEmpty) {
             /* TODO: See if we need to use a different method to verify if the stack is a potion
 
-                This relies on `PotionUtil.getPotion`'s result to determine whether the new value is a potion.
-                However, one can easily create a custom item that has a `Potion` tag to fool our system that it is a potion,
-                and since this dispenses a glass bottle out after processing, I am not very sure if this is a right response
-                since some items might not need a glass bottle to craft. Maybe I will add a tag if necessary.
-             */
-            val newType = PotionUtil.getPotion(newValue)
-            if (newType == Potions.EMPTY) return newValue
+            This relies on `PotionUtil.getPotion`'s result to determine whether the new value is a potion.
+            However, one can easily create a custom item that has a `Potion` tag to fool our system that it is a potion,
+            and since this dispenses a glass bottle out after processing, I am not very sure if this is a right response
+            since some items might not need a glass bottle to craft. Maybe I will add a tag if necessary.
+         */
+            val newType = PotionUtil.getPotion(value)
+            if (newType == Potions.EMPTY) return value
 
             potion.type = newType
             potion.amount = USES_PER_POTION_ITEM
-            return ItemStack(Items.GLASS_BOTTLE, newValue.count)
+            return ItemStack(Items.GLASS_BOTTLE, value.count)
 
         }
-        return newValue
+
+        return value
     }
 
     override val type: ModuleType<*> = TYPE

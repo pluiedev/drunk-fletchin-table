@@ -45,7 +45,6 @@ object FletchingTableDelegate {
                     blockEntity.sync()
                     return ActionResult.SUCCESS
                 } else {
-
                     val module = modules[side]
                     module?.let {
                         player.openHandledScreen(it)
