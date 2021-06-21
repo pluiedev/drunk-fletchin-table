@@ -28,10 +28,10 @@ class CraftingScreen(
         val TEXTURE = DrunkFletchinTable.id("textures/gui/fletchin_table/crafting.png")
     }
 
-    override fun render(matrices: MatrixStack, mouseX: Int, mouseY: Int, delta: Float) {
-        super.render(matrices, mouseX, mouseY, delta)
+    override fun drawBackground(matrices: MatrixStack, delta: Float, mouseX: Int, mouseY: Int) {
+        super.drawBackground(matrices, delta, mouseX, mouseY)
         RenderSystem.setShaderColor(1f, 1f, 1f, 1f)
-        client?.textureManager?.bindTexture(TEXTURE)
+        RenderSystem.setShaderTexture(0, TEXTURE)
         drawTexture(matrices, x+45, y+17, 0, 0, 160, 61)
     }
 

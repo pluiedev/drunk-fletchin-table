@@ -61,14 +61,9 @@ abstract class FletchinScreen<T: FletchinScreenHandler>(
         drawMouseoverTooltip(matrices, mouseX, mouseY)
     }
 
-    override fun drawForeground(matrices: MatrixStack, mouseX: Int, mouseY: Int) {
-        super.drawForeground(matrices, mouseX, mouseY)
-        textRenderer.draw(matrices, title, 202f - textRenderer.getWidth(title), 20f, 0x404040)
-    }
-
     override fun drawBackground(matrices: MatrixStack, delta: Float, mouseX: Int, mouseY: Int) {
         RenderSystem.setShaderColor(1f, 1f, 1f, 1f)
-        client?.textureManager?.bindTexture(TEXTURE)
+        RenderSystem.setShaderTexture(0, TEXTURE)
         drawTexture(matrices, x, y, 0, 0, backgroundWidth, backgroundHeight)
     }
 }

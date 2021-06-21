@@ -24,10 +24,10 @@ abstract class FletchinScreenHandler(
         offHandX: Int = 10,
     ) {
         // hotbar
-        addSlotGrid(playerInventory, 1, 9, x, y)
+        addSlotGrid(playerInventory, 1, 9, x, hotbarY)
 
         // main
-        addSlotGrid(playerInventory, 3, 9, x, hotbarY, startIndex = 9)
+        addSlotGrid(playerInventory, 3, 9, x, y, startIndex = 9)
 
         // offhand
         addSlot(Slot(playerInventory, 40, offHandX, hotbarY))
@@ -52,7 +52,7 @@ abstract class FletchinScreenHandler(
                 index++
                 curX += slotOffsetX
             }
-            curX = 0
+            curX = x
             curY += slotOffsetY
         }
     }
