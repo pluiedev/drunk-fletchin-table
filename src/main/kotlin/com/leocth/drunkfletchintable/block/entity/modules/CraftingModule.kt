@@ -1,12 +1,11 @@
 package com.leocth.drunkfletchintable.block.entity.modules
 
 import com.leocth.drunkfletchintable.block.entity.FletchinTableBlockEntity
+import com.leocth.drunkfletchintable.screen.CraftingScreenHandler
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
-import net.minecraft.client.gui.widget.ButtonWidget
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
-import net.minecraft.screen.CraftingScreenHandler
 import net.minecraft.screen.ScreenHandler
 import net.minecraft.text.Text
 import net.minecraft.text.TranslatableText
