@@ -1,8 +1,7 @@
 {
-    "container.drunkfletchintable.fletchin_table": "制箭台",
-    "container.drunkfletchintable.fletchin_table.none": "选择模式",
-    "container.drunkfletchintable.fletchin_table.crafting": "合成",
-    "container.drunkfletchintable.fletchin_table.tipping": "装药",
+    "screen.drunkfletchintable.crafting": "合成",
+    "screen.drunkfletchintable.tipping": "装药",
 
-    "block.drunkfletchintable.tatertater": "小土豆.gif"
+    "screen.drunkfletchintable.tipping.drain": "Shift+单击清空",
+    "block.drunkfletchintable.tatertater": ":小土豆.gif"
 }

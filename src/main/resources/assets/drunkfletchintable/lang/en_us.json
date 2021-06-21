@@ -1,10 +1,7 @@
 {
-    "container.drunkfletchintable.fletchin_table": "Fletching Table",
-    "container.drunkfletchintable.fletchin_table.none": "Select a mode",
-    "container.drunkfletchintable.fletchin_table.crafting": "Crafting",
-    "container.drunkfletchintable.fletchin_table.tipping": "Tipping",
-    "container.drunkfletchintable.fletchin_table.imbuing": "Imbuing",
+    "screen.drunkfletchintable.crafting": "Crafting",
+    "screen.drunkfletchintable.tipping": "Tipping",
 
-    "tooltip.drunkfletchintable.tipping.drain": "Shift-click to drain",
+    "screen.drunkfletchintable.tipping.drain": "Shift-click to drain",
     "block.drunkfletchintable.tatertater": ":tiny_potato:"
 }
