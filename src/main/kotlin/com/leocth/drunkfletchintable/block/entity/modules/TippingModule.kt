@@ -1,9 +1,11 @@
 package com.leocth.drunkfletchintable.block.entity.modules
 
 import com.leocth.drunkfletchintable.block.entity.FletchinTableBlockEntity
+import com.leocth.drunkfletchintable.screen.TippingScreenHandler
 import com.leocth.drunkfletchintable.util.*
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
+import net.minecraft.inventory.Inventory
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
 import net.minecraft.nbt.NbtCompound
@@ -48,19 +50,20 @@ class TippingModule(blockEntity: FletchinTableBlockEntity) : FletchinModule(bloc
         nbt.putCompound("potion", potion::writeNbt)
     }
 
-    override fun readClientNbt(nbt: NbtCompound) {
-        readNbt(nbt)
-    }
+    override fun readClientNbt(nbt: NbtCompound) { readNbt(nbt) }
 
-    override fun writeClientNbt(nbt: NbtCompound) {
-        writeNbt(nbt)
-    }
+    override fun writeClientNbt(nbt: NbtCompound) { writeNbt(nbt) }
 
-    override fun createMenu(syncId: Int, inv: PlayerInventory, player: PlayerEntity): ScreenHandler? {
-        TODO("Not yet implemented")
-    }
+
+
+    private val inv = ListBasedInventory(potionStack, arrowStack, productStack)
+
+    override fun createMenu(syncId: Int, playerInv: PlayerInventory, player: PlayerEntity): ScreenHandler
+            = TippingScreenHandler(syncId, playerInv, inv, screenHandlerContext)
 
     override fun getDisplayName(): Text = TranslatableText("screen.drunkfletchintable.tipping")
+
+
 
     // TODO: calculating this every tick is a bit wasteful
     private val canWork
@@ -108,6 +111,10 @@ class TippingModule(blockEntity: FletchinTableBlockEntity) : FletchinModule(bloc
 
     companion object {
         val TYPE = ModuleType(::TippingModule)
+    }
+
+    class Inv: Inventory {
+
     }
 }
 

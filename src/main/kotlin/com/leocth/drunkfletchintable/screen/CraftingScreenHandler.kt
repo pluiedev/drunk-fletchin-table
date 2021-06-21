@@ -11,8 +11,8 @@ import net.minecraft.screen.slot.CraftingResultSlot
 
 class CraftingScreenHandler(
     syncId: Int,
-    private val playerInventory: PlayerInventory,
-    private val context: ScreenHandlerContext = ScreenHandlerContext.EMPTY,
+    playerInventory: PlayerInventory,
+    context: ScreenHandlerContext = ScreenHandlerContext.EMPTY,
 ): FletchinScreenHandler(TYPE, syncId, playerInventory, context) {
 
     private val input = CraftingInventory(this, 3, 3)

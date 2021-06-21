@@ -7,6 +7,7 @@ import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.screen.NamedScreenHandlerFactory
 import net.minecraft.screen.ScreenHandler
+import net.minecraft.screen.ScreenHandlerContext
 
 abstract class FletchinModule(val blockEntity: FletchinTableBlockEntity): NbtSerializable, NamedScreenHandlerFactory {
     open fun serverTick() {}
@@ -17,4 +18,7 @@ abstract class FletchinModule(val blockEntity: FletchinTableBlockEntity): NbtSer
     override fun writeNbt(nbt: NbtCompound) {}
     open fun readClientNbt(nbt: NbtCompound) {}
     open fun writeClientNbt(nbt: NbtCompound) {}
+
+    val screenHandlerContext: ScreenHandlerContext
+        get() = ScreenHandlerContext.create(blockEntity.world, blockEntity.pos)
 }

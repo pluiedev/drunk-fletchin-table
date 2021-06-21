@@ -61,5 +61,10 @@ abstract class FletchinScreenHandler(
         addSlot(Slot(inventory, index, x, y))
     }
 
+    protected fun addSlots(vararg slots: Slot) {
+        for (slot in slots)
+            addSlot(slot)
+    }
+
     override fun canUse(player: PlayerEntity) = canUse(context, player, Blocks.FLETCHING_TABLE)
 }
