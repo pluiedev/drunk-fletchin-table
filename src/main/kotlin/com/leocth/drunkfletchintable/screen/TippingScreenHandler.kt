@@ -1,6 +1,7 @@
 package com.leocth.drunkfletchintable.screen
 
 import com.leocth.drunkfletchintable.DrunkFletchinTable
+import com.leocth.drunkfletchintable.item.DftItemTags
 import com.leocth.drunkfletchintable.screen.slots.SlotWithFilteredInput
 import com.leocth.drunkfletchintable.screen.slots.TakeOnlySlot
 import net.fabricmc.fabric.api.screenhandler.v1.ScreenHandlerRegistry
@@ -29,7 +30,7 @@ class TippingScreenHandler(
         addPlayerInventorySlots()
 
         // TODO: add tags for acceptable items
-        val potionSlot = SlotWithFilteredInput(inventory, 0, 70, 25) { PotionUtil.getPotion(it) != null }
+        val potionSlot = SlotWithFilteredInput(inventory, 0, 70, 25) { it.isIn(DftItemTags.POTIONS) }
         val arrowSlot = SlotWithFilteredInput(inventory, 1, 138, 61) { it.isIn(ItemTags.ARROWS) }
         val resultSlot = TakeOnlySlot(inventory, 2, 169, 61)
 

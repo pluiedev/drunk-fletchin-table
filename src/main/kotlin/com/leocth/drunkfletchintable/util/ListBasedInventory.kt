@@ -4,7 +4,7 @@ import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.inventory.Inventories
 import net.minecraft.inventory.Inventory
 import net.minecraft.item.ItemStack
-import net.minecraft.util.collection.DefaultedList
+import kotlin.reflect.KMutableProperty0
 
 
 /**
@@ -12,12 +12,13 @@ import net.minecraft.util.collection.DefaultedList
  *
  * Heavily based on ImplementedInventory, originally by Juuz
  */
-open class ListBasedInventory(private val items: DefaultedList<ItemStack>): Inventory {
+open class ListBasedInventory(
+    private val items: List<KMutableProperty0<ItemStack>>
+): Inventory {
 
     constructor(
-        default: ItemStack = ItemStack.EMPTY,
-        vararg items: ItemStack
-    ): this(DefaultedList.copyOf(default, *items))
+        vararg items: KMutableProperty0<ItemStack>
+    ): this(listOf(*items))
 
     /**
      * Returns the inventory size.
@@ -41,7 +42,7 @@ open class ListBasedInventory(private val items: DefaultedList<ItemStack>): Inve
      * Retrieves the item in the slot.
      */
     override fun getStack(slot: Int): ItemStack {
-        return items[slot]
+        return items[slot].get()
     }
 
     /**
@@ -51,9 +52,8 @@ open class ListBasedInventory(private val items: DefaultedList<ItemStack>): Inve
      * takes all items in that slot.
      */
     override fun removeStack(slot: Int, count: Int): ItemStack {
-        val result = Inventories.splitStack(items, slot, count)
-        if (!result.isEmpty)
-            markDirty()
+        val result = splitStack(items, slot, count)
+        if (!result.isEmpty) markDirty()
         return result
     }
 
@@ -62,7 +62,7 @@ open class ListBasedInventory(private val items: DefaultedList<ItemStack>): Inve
      * @param slot The slot to remove from.
      */
     override fun removeStack(slot: Int): ItemStack {
-        return Inventories.removeStack(items, slot)
+        return removeStack(items, slot)
     }
 
     /**
@@ -73,7 +73,7 @@ open class ListBasedInventory(private val items: DefaultedList<ItemStack>): Inve
      * it gets resized to this inventory's maximum amount.
      */
     override fun setStack(slot: Int, stack: ItemStack) {
-        items[slot] = stack
+        items[slot].set(stack)
         if (stack.count > maxCountPerStack) {
             stack.count = maxCountPerStack
         }
@@ -83,7 +83,9 @@ open class ListBasedInventory(private val items: DefaultedList<ItemStack>): Inve
      * Clears the inventory.
      */
     override fun clear() {
-        items.clear()
+        for (i in items) {
+            i.set(ItemStack.EMPTY)
+        }
     }
 
     /**
@@ -100,12 +102,21 @@ open class ListBasedInventory(private val items: DefaultedList<ItemStack>): Inve
      */
     override fun canPlayerUse(player: PlayerEntity): Boolean = true
 
+    // cursed
     companion object {
-        /**
-         * Creates a new inventory with the specified size.
-         */
-        fun ofSize(size: Int): ListBasedInventory {
-            return ListBasedInventory(DefaultedList.ofSize(size, ItemStack.EMPTY))
+        private fun splitStack(items: List<KMutableProperty0<ItemStack>>, slot: Int, count: Int): ItemStack {
+            val stack = items[slot].get()
+            return if (slot in items.indices && !(stack.isEmpty && count > 0))
+                stack.split(count)
+            else ItemStack.EMPTY
+        }
+
+        private fun removeStack(items: List<KMutableProperty0<ItemStack>>, slot: Int): ItemStack {
+            val stack = items[slot].get()
+            return if (slot in items.indices) {
+                items[slot].set(ItemStack.EMPTY)
+                stack
+            } else ItemStack.EMPTY
         }
     }
 }
