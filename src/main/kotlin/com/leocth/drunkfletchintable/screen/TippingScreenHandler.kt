@@ -39,6 +39,9 @@ class TippingScreenHandler(
         checkDataCount(delegate, TippingModule.DELEGATE_SIZE)
         addPlayerInventorySlots()
 
+        inventory.onOpen(player)
+        addProperties(delegate)
+
         // TODO: add tags for acceptable items
         val potionSlot = SlotWithFilteredInput(inventory, 0, 70, 25) { it.isIn(DftItemTags.POTIONS) }
         val arrowSlot = SlotWithFilteredInput(inventory, 1, 138, 61) { it.isIn(ItemTags.ARROWS) }
