@@ -14,6 +14,7 @@ import net.minecraft.potion.PotionUtil
 import net.minecraft.potion.Potions
 import net.minecraft.text.Text
 import net.minecraft.text.TranslatableText
+import net.minecraft.util.math.MathHelper
 
 class TippingScreen(
     handler: TippingScreenHandler,
@@ -21,7 +22,7 @@ class TippingScreen(
     title: Text
 ) : FletchinScreen<TippingScreenHandler>(handler, inventory, title) {
 
-    private val data = CachedPotionData()
+    private var data = CachedPotionData(handler.potion, handler.potionAmount)
 
     override fun tick() {
         super.tick()
@@ -41,8 +42,7 @@ class TippingScreen(
 
         if (potion != Potions.EMPTY) {
             if (hoveringOverPotion(mouseX.toInt(), mouseY.toInt()) && Screen.hasShiftDown()) {
-                // clear potion amount
-                handler.potionAmount = 0
+                // TODO: implement custom packet when it is drained
                 return true
             }
         }
@@ -59,11 +59,9 @@ class TippingScreen(
     }
 
     private fun drawPotionOverlay(matrices: MatrixStack, delta: Float, mouseX: Int, mouseY: Int, potion: Potion) {
-        val amount = handler.potionAmount
-
+        // TODO: a lerp would be nice
         val height = data.height
         val hRounded = height.toInt()
-        //TODO: `getColor` sounds expensive; caching it might help
         val (_, r, g, b) = data.cachedPotionColor
 
         // set color
@@ -71,7 +69,7 @@ class TippingScreen(
             // liquid in bottle
             drawTexture(matrices, x+90, y+51-hRounded, 45, 95-hRounded, 55, hRounded)
             // currently pouring; draw stream
-            if (height > 0f)
+            if (handler.pouring)
                 drawTexture(matrices, x+167, y+42, 122, 86, 27, 36)
         }
 
@@ -94,32 +92,37 @@ class TippingScreen(
 }
 
 
-class CachedPotionData {
-    var potion = Potions.EMPTY
+internal class CachedPotionData(potion: Potion, amount: Int) {
+    var potion: Potion = potion
         private set
-    var amount = 0
+    var amount: Int = amount
         private set
-    // impossible value; always unexpected
-    var cachedPotionColor: Argb = Argb(-1f, -1f, -1f, -1f)
+    var cachedPotionColor: Argb = PotionUtil.getColor(potion).toArgb()
         private set
-    var tooltip: List<Text> = listOf()
+    var tooltip: List<Text> = makeTooltip(potion)
         private set
-    var height = 0f
+    var height: Float = getHeightFromAmount(amount)
         private set
 
     fun tryToUpdate(potion: Potion, amount: Int) {
-        if (this.potion != potion || this.amount != amount) {
+        if (this.potion != potion) {
             this.potion = potion
-            this.amount = amount
 
             cachedPotionColor = PotionUtil.getColor(potion).toArgb()
             tooltip = makeTooltip(potion)
+        }
+        if (this.amount != amount) {
+            this.amount = amount
+
             height = getHeightFromAmount(amount)
         }
     }
 
     companion object {
         private const val MAX_HEIGHT = 34
+
+        private fun getHeightFromAmount(amount: Int): Float
+            = MAX_HEIGHT * amount / USES_PER_POTION_ITEM.toFloat()
 
         private fun makeTooltip(potion: Potion): List<Text> {
             val list = mutableListOf<Text>()
@@ -147,8 +150,5 @@ class CachedPotionData {
             list.add(TranslatableText("tooltip.drunkfletchintable.tipping.drain"))
             return list
         }
-
-        private fun getHeightFromAmount(amount: Int): Float
-                = MAX_HEIGHT * amount / USES_PER_POTION_ITEM.toFloat()
     }
 }

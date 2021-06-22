@@ -30,9 +30,11 @@ class TippingScreenHandler(
     val potion: Potion
         @Environment(EnvType.CLIENT) get() = Registry.POTION[delegate[0]]
 
-    var potionAmount: Int
+    val potionAmount: Int
         @Environment(EnvType.CLIENT) get() = delegate[1]
-        @Environment(EnvType.CLIENT) set(value) { delegate[1] = value }
+
+    val pouring: Boolean
+        @Environment(EnvType.CLIENT) get() = delegate[2] != 0
 
     init {
         checkSize(inventory, 3)

@@ -45,7 +45,7 @@ class TippingModule(blockEntity: FletchinTableBlockEntity): FletchinModule(block
         potionStack = nbt.getItemStack("potionStack")
         arrowStack = nbt.getItemStack("arrowStack")
         productStack = nbt.getItemStack("productStack")
-        nbt.putCompound("potion", potion::readNbt)
+        nbt.getCompound("potion", potion::readNbt)
     }
 
     override fun writeNbt(nbt: NbtCompound) {
@@ -137,21 +137,19 @@ class TippingModule(blockEntity: FletchinTableBlockEntity): FletchinModule(block
     override val type: ModuleType<*> = TYPE
     companion object {
         val TYPE = ModuleType(::TippingModule)
-        const val DELEGATE_SIZE = 2
+        const val DELEGATE_SIZE = 3
     }
 
     inner class Delegate: PropertyDelegate {
         override fun get(index: Int) = when (index) {
             0 -> Registry.POTION.getRawId(potion.type)
             1 -> potion.amount
+            2 -> if (canWork) 1 else 0
             else -> -1
         }
 
         override fun set(index: Int, value: Int) {
-            when (index) {
-                0 -> potion.type = Registry.POTION.get(value)
-                1 -> potion.amount = value
-            }
+            // NO-OP
         }
 
         override fun size() = DELEGATE_SIZE
