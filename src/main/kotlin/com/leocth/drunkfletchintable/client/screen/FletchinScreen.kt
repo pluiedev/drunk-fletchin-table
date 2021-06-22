@@ -66,4 +66,11 @@ abstract class FletchinScreen<T: FletchinScreenHandler>(
         RenderSystem.setShaderTexture(0, TEXTURE)
         drawTexture(matrices, x, y, 0, 0, backgroundWidth, backgroundHeight)
     }
+
+    protected fun drawModuleBg(matrices: MatrixStack, texture: Identifier) {
+        RenderSystem.setShaderColor(1f, 1f, 1f, 1f)
+        RenderSystem.setShaderTexture(0, texture)
+        drawTexture(matrices, x+45, y+17, 0, 0, 160, 61)
+
+    }
 }

@@ -8,19 +8,19 @@ import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
-import net.minecraft.inventory.Inventory
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.potion.Potion
 import net.minecraft.potion.PotionUtil
 import net.minecraft.potion.Potions
+import net.minecraft.screen.PropertyDelegate
 import net.minecraft.screen.ScreenHandler
 import net.minecraft.text.Text
 import net.minecraft.text.TranslatableText
 import net.minecraft.util.registry.Registry
-import kotlin.reflect.KProperty
 
+// TODO: refactor to make this prettier
 class TippingModule(blockEntity: FletchinTableBlockEntity): FletchinModule(blockEntity) {
     private val ticker = Ticker(2, this::finishedTipping)
 
@@ -61,15 +61,17 @@ class TippingModule(blockEntity: FletchinTableBlockEntity): FletchinModule(block
 
     override fun writeClientNbt(nbt: NbtCompound) { writeNbt(nbt) }
 
+
+
     // TODO: this doesn't work since potionStack is a property
     private val inv = ListBasedInventory(this::potionStack, this::arrowStack, this::productStack)
 
+    private val delegate = Delegate()
+
     override fun createMenu(syncId: Int, playerInv: PlayerInventory, player: PlayerEntity): ScreenHandler
-            = TippingScreenHandler(syncId, playerInv, inv, screenHandlerContext)
+            = TippingScreenHandler(syncId, playerInv, inv, delegate, screenHandlerContext)
 
     override fun getDisplayName(): Text = TranslatableText("screen.drunkfletchintable.tipping")
-
-
 
     @Environment(EnvType.CLIENT)
     override fun createButton(x: Int, y: Int): Button
@@ -133,14 +135,31 @@ class TippingModule(blockEntity: FletchinTableBlockEntity): FletchinModule(block
     }
 
     override val type: ModuleType<*> = TYPE
-
     companion object {
         val TYPE = ModuleType(::TippingModule)
+        const val DELEGATE_SIZE = 2
+    }
+
+    inner class Delegate: PropertyDelegate {
+        override fun get(index: Int) = when (index) {
+            0 -> Registry.POTION.getRawId(potion.type)
+            1 -> potion.amount
+            else -> -1
+        }
+
+        override fun set(index: Int, value: Int) {
+            when (index) {
+                0 -> potion.type = Registry.POTION.get(value)
+                1 -> potion.amount = value
+            }
+        }
+
+        override fun size() = DELEGATE_SIZE
     }
 }
 
 // TODO create a config for this
-private const val USES_PER_POTION_ITEM = 24
+const val USES_PER_POTION_ITEM = 24
 
 class PotionWithAmount(type: Potion, amount: Int, private val onDepletion: () -> Unit): NbtSerializable {
     private var _type: Potion = type

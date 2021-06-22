@@ -1,32 +1,42 @@
 package com.leocth.drunkfletchintable.screen
 
 import com.leocth.drunkfletchintable.DrunkFletchinTable
+import com.leocth.drunkfletchintable.block.entity.modules.TippingModule
 import com.leocth.drunkfletchintable.item.DftItemTags
 import com.leocth.drunkfletchintable.screen.slots.SlotWithFilteredInput
 import com.leocth.drunkfletchintable.screen.slots.TakeOnlySlot
+import net.fabricmc.api.EnvType
+import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.screenhandler.v1.ScreenHandlerRegistry
 import net.minecraft.entity.player.PlayerInventory
-import net.minecraft.inventory.CraftingInventory
-import net.minecraft.inventory.CraftingResultInventory
 import net.minecraft.inventory.Inventory
 import net.minecraft.inventory.SimpleInventory
-import net.minecraft.item.ItemStack
-import net.minecraft.potion.PotionUtil
+import net.minecraft.potion.Potion
+import net.minecraft.screen.ArrayPropertyDelegate
+import net.minecraft.screen.PropertyDelegate
 import net.minecraft.screen.ScreenHandlerContext
 import net.minecraft.screen.ScreenHandlerType
-import net.minecraft.screen.slot.CraftingResultSlot
-import net.minecraft.screen.slot.Slot
 import net.minecraft.tag.ItemTags
+import net.minecraft.util.registry.Registry
 
 class TippingScreenHandler(
     syncId: Int,
     playerInventory: PlayerInventory,
     inventory: Inventory = SimpleInventory(3),
+    private val delegate: PropertyDelegate = ArrayPropertyDelegate(TippingModule.DELEGATE_SIZE),
     context: ScreenHandlerContext = ScreenHandlerContext.EMPTY,
 ): FletchinScreenHandler(TYPE, syncId, playerInventory, context) {
 
+    val potion: Potion
+        @Environment(EnvType.CLIENT) get() = Registry.POTION[delegate[0]]
+
+    var potionAmount: Int
+        @Environment(EnvType.CLIENT) get() = delegate[1]
+        @Environment(EnvType.CLIENT) set(value) { delegate[1] = value }
+
     init {
         checkSize(inventory, 3)
+        checkDataCount(delegate, TippingModule.DELEGATE_SIZE)
         addPlayerInventorySlots()
 
         // TODO: add tags for acceptable items

@@ -24,15 +24,12 @@ class CraftingScreen(
     title: Text
 ) : FletchinScreen<CraftingScreenHandler>(handler, inventory, title) {
 
+    override fun drawBackground(matrices: MatrixStack, delta: Float, mouseX: Int, mouseY: Int) {
+        super.drawBackground(matrices, delta, mouseX, mouseY)
+        drawModuleBg(matrices, TEXTURE)
+    }
+
     companion object {
         val TEXTURE = DrunkFletchinTable.id("textures/gui/fletchin_table/crafting.png")
     }
-
-    override fun drawBackground(matrices: MatrixStack, delta: Float, mouseX: Int, mouseY: Int) {
-        super.drawBackground(matrices, delta, mouseX, mouseY)
-        RenderSystem.setShaderColor(1f, 1f, 1f, 1f)
-        RenderSystem.setShaderTexture(0, TEXTURE)
-        drawTexture(matrices, x+45, y+17, 0, 0, 160, 61)
-    }
-
 }
