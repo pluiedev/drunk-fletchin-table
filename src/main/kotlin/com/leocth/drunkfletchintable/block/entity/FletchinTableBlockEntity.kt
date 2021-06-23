@@ -51,8 +51,7 @@ class FletchinTableBlockEntity(blockPos: BlockPos, blockState: BlockState):
 
                 modulesNbt.findCompound(key) {
                     val id = it.getIdentifier("id")
-                    val moduleType = ModuleRegistry.find(id)
-                    if (moduleType == null) {
+                    val moduleType = ModuleRegistry.find(id) ?: run {
                         DrunkFletchinTable.LOGGER.warn("Module type not found: $id! Ignoring...")
                         return@findCompound
                     }
@@ -89,8 +88,7 @@ class FletchinTableBlockEntity(blockPos: BlockPos, blockState: BlockState):
                 val dir = Direction.byName(key) ?: continue
                 modulesNbt.findCompound(key) {
                     val id = it.getIdentifier("id")
-                    val moduleType = ModuleRegistry.find(id)
-                    if (moduleType == null) {
+                    val moduleType = ModuleRegistry.find(id) ?: run {
                         DrunkFletchinTable.LOGGER.warn("Module type not found: $id! Ignoring...")
                         return@findCompound
                     }

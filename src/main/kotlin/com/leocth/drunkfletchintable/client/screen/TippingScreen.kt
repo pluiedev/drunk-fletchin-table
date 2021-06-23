@@ -82,7 +82,6 @@ class TippingScreen(
     companion object {
         private val TEXTURE = DrunkFletchinTable.id("textures/gui/fletchin_table/tipping.png")
 
-
         private inline fun setShaderColor(r: Float, g: Float, b: Float, a: Float, block: () -> Unit) {
             RenderSystem.setShaderColor(r, g, b, a)
             block()
@@ -124,6 +123,8 @@ internal class CachedPotionData(potion: Potion, amount: Int) {
         private fun getHeightFromAmount(amount: Int): Float
             = MAX_HEIGHT * amount / USES_PER_POTION_ITEM.toFloat()
 
+        private val DRAIN_TEXT = TranslatableText("screen.drunkfletchintable.tipping.drain")
+
         private fun makeTooltip(potion: Potion): List<Text> {
             val list = mutableListOf<Text>()
 
@@ -147,7 +148,7 @@ internal class CachedPotionData(potion: Potion, amount: Int) {
                  */
                 list.add(text)
             }
-            list.add(TranslatableText("tooltip.drunkfletchintable.tipping.drain"))
+            list.add(DRAIN_TEXT)
             return list
         }
     }
