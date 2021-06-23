@@ -36,6 +36,10 @@ class TippingScreenHandler(
     val pouring: Boolean
         @Environment(EnvType.CLIENT) get() = delegate[2] != 0
 
+    fun drain() {
+        delegate[1] = 0
+    }
+
     init {
         checkSize(inventory, 3)
         checkDataCount(delegate, TippingModule.DELEGATE_SIZE)

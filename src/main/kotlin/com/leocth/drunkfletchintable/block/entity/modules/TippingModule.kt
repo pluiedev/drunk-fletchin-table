@@ -142,14 +142,16 @@ class TippingModule(blockEntity: FletchinTableBlockEntity): FletchinModule(block
 
     inner class Delegate: PropertyDelegate {
         override fun get(index: Int) = when (index) {
-            0 -> Registry.POTION.getRawId(potion.type)
+            0 -> potion.typeId
             1 -> potion.amount
             2 -> if (canWork) 1 else 0
             else -> -1
         }
 
         override fun set(index: Int, value: Int) {
-            // NO-OP
+            when (index) {
+                1 -> potion.amount = value
+            }
         }
 
         override fun size() = DELEGATE_SIZE
@@ -161,6 +163,7 @@ const val USES_PER_POTION_ITEM = 24
 
 class PotionWithAmount(type: Potion, amount: Int, private val onDepletion: () -> Unit): NbtSerializable {
     private var _type: Potion = type
+
     private var _amount: Int = amount
 
     var type: Potion
@@ -168,9 +171,15 @@ class PotionWithAmount(type: Potion, amount: Int, private val onDepletion: () ->
         set(value) {
             if (value == Potions.EMPTY)
                 clear()
-            else
+            else {
                 _type = value
+                typeId = calcTypeId()
+            }
         }
+
+    var typeId: Int = calcTypeId()
+        private set
+
     var amount: Int
         get() = _amount
         set(value) {
@@ -180,9 +189,13 @@ class PotionWithAmount(type: Potion, amount: Int, private val onDepletion: () ->
                 _amount = value
         }
 
+    private fun calcTypeId(): Int
+        = Registry.POTION.getRawId(_type)
+
     private fun clear() {
         _type = Potions.EMPTY
         _amount = 0
+        typeId = calcTypeId()
         onDepletion()
     }
 

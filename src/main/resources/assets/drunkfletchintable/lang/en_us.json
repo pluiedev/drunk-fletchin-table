@@ -2,6 +2,7 @@
     "screen.drunkfletchintable.crafting": "Crafting",
     "screen.drunkfletchintable.tipping": "Tipping",
 
-    "screen.drunkfletchintable.tipping.drain": "Shift-click to drain",
+    "screen.drunkfletchintable.tipping.drain": "§eShift-click§r to drain",
+    "screen.drunkfletchintable.tipping.usesLeft": "%d §7uses left",
     "block.drunkfletchintable.tatertater": ":tiny_potato:"
 }

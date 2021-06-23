@@ -2,6 +2,7 @@
     "screen.drunkfletchintable.crafting": "合成",
     "screen.drunkfletchintable.tipping": "装药",
 
-    "screen.drunkfletchintable.tipping.drain": "Shift+单击清空",
+    "screen.drunkfletchintable.tipping.drain": "§eShift+单击§r清空",
+    "screen.drunkfletchintable.tipping.usesLeft": "§7还能使用§r%d§7次",
     "block.drunkfletchintable.tatertater": ":小土豆.gif"
 }

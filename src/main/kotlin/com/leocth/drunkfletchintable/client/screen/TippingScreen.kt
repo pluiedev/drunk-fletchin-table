@@ -2,6 +2,7 @@ package com.leocth.drunkfletchintable.client.screen
 
 import com.leocth.drunkfletchintable.DrunkFletchinTable
 import com.leocth.drunkfletchintable.block.entity.modules.USES_PER_POTION_ITEM
+import com.leocth.drunkfletchintable.network.DftC2SPackets
 import com.leocth.drunkfletchintable.screen.TippingScreenHandler
 import com.leocth.drunkfletchintable.util.Argb
 import com.leocth.drunkfletchintable.util.toArgb
@@ -12,6 +13,7 @@ import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.potion.Potion
 import net.minecraft.potion.PotionUtil
 import net.minecraft.potion.Potions
+import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import net.minecraft.text.TranslatableText
 import net.minecraft.util.math.MathHelper
@@ -42,7 +44,7 @@ class TippingScreen(
 
         if (potion != Potions.EMPTY) {
             if (hoveringOverPotion(mouseX.toInt(), mouseY.toInt()) && Screen.hasShiftDown()) {
-                // TODO: implement custom packet when it is drained
+                DftC2SPackets.sendDrainPacket()
                 return true
             }
         }
@@ -98,22 +100,22 @@ internal class CachedPotionData(potion: Potion, amount: Int) {
         private set
     var cachedPotionColor: Argb = PotionUtil.getColor(potion).toArgb()
         private set
-    var tooltip: List<Text> = makeTooltip(potion)
+    var tooltip: List<Text> = makeTooltip(potion, amount)
         private set
     var height: Float = getHeightFromAmount(amount)
         private set
 
     fun tryToUpdate(potion: Potion, amount: Int) {
-        if (this.potion != potion) {
-            this.potion = potion
-
-            cachedPotionColor = PotionUtil.getColor(potion).toArgb()
-            tooltip = makeTooltip(potion)
-        }
         if (this.amount != amount) {
             this.amount = amount
 
             height = getHeightFromAmount(amount)
+        }
+        if (this.potion != potion) {
+            this.potion = potion
+
+            cachedPotionColor = PotionUtil.getColor(potion).toArgb()
+            tooltip = makeTooltip(potion, amount)
         }
     }
 
@@ -125,7 +127,7 @@ internal class CachedPotionData(potion: Potion, amount: Int) {
 
         private val DRAIN_TEXT = TranslatableText("screen.drunkfletchintable.tipping.drain")
 
-        private fun makeTooltip(potion: Potion): List<Text> {
+        private fun makeTooltip(potion: Potion, amount: Int): List<Text> {
             val list = mutableListOf<Text>()
 
             for (effect in potion.effects) {
@@ -148,6 +150,8 @@ internal class CachedPotionData(potion: Potion, amount: Int) {
                  */
                 list.add(text)
             }
+            list.add(LiteralText.EMPTY)
+            list.add(TranslatableText("screen.drunkfletchintable.tipping.usesLeft", amount))
             list.add(DRAIN_TEXT)
             return list
         }

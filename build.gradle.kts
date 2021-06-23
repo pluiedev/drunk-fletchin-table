@@ -5,6 +5,9 @@ plugins {
 }
 
 repositories {
+    maven("https://jitpack.io") {
+        name = "JitPack"
+    }
     maven("https://ladysnake.jfrog.io/artifactory/mods") {
         name = "Ladysnake Mods"
     }
@@ -17,6 +20,8 @@ dependencies {
     val fapiVersion: String by project
     val flkVersion: String by project
     val ccaVersion: String by project
+    val lazydfuVersion: String by project
+    val dashVersion: String by project
 
     minecraft("com.mojang:minecraft:$minecraftVersion")
     mappings("net.fabricmc:yarn:$yarnVersion:v2")
